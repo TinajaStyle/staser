@@ -5,7 +5,7 @@ import os
 import shutil
 
 
-def install(path: str, index_path: str, uploads_path: str, user_uid: str | None):
+def install(path: str, index_path: str, uploads_path: str, user_uid: int | None):
     subprocess.check_call(
         [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"]
     )
@@ -75,8 +75,8 @@ if __name__ == "__main__":
         "-U",
         "--user-uid",
         type=int,
-        help="Use if you want to put in a privilege path"
-        "like /bin but you want to keep your directories as a normal user",
+        help="Use if you want to put it in a privileged path"
+        " like /bin but you want to keep your directories as a normal user",
     )
 
     args = parser.parse_args()
