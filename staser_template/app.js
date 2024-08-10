@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const fileInput = document.getElementById('file');
     const alert = document.getElementById('alert')
     const header = document.getElementById('header');
-    const headerText = "Directory list of ";
+    const headerText = "Directory listing of ";
     let currentDir = "./";
 
     function createListItem(name, type, clickHandler) {
