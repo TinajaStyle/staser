@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
 
         if (response.ok) {
-            msg = "File upload success"
+            msg = "File upload successful"
         }
         else {
             msg = "File upload failed"

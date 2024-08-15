@@ -83,4 +83,4 @@ if __name__ == "__main__":
 
     install(args.path, args.index_path, args.uploads_path, args.user_uid)
 
-    print("\nInstall sucessfull try: staser -h\n")
+    print("\nInstallation successful try: staser -h\n")

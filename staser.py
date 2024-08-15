@@ -1,7 +1,6 @@
 #!P-REPLACE
 
 from typing import Annotated
-import logging.config
 import argparse
 import logging
 import mimetypes
