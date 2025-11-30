@@ -71,11 +71,11 @@ async def recive_file(file: UploadFile):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="static server with steroids")
-    parser.add_argument("-i", "--ip", default="127.0.0.1", help="your ip to listen")
-    parser.add_argument("-p", "--port", type=int, default=8080, help="port to listen")
+    parser = argparse.ArgumentParser(prog="Static server with steroids")
+    parser.add_argument("-i", "--ip", default="127.0.0.1", help="IP to listen, default: 127.0.0.1")
+    parser.add_argument("-p", "--port", type=int, default=8080, help="Port to listen, default: 8080")
     parser.add_argument(
-        "-d", "--directory", required=True, help="path to the directory"
+        "-d", "--directory", required=True, help="Path to the directory to serve"
     )
 
     args = parser.parse_args()

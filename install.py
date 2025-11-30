@@ -5,7 +5,7 @@ import os
 import shutil
 
 
-def install(path: str, index_path: str, uploads_path: str, user_uid: int | None):
+def install(path: str, index_path: str, uploads_path: str):
     subprocess.check_call(
         [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"]
     )
@@ -27,14 +27,13 @@ def install(path: str, index_path: str, uploads_path: str, user_uid: int | None)
         f.write(content)
     os.chmod(bin_path, 0o755)
 
-    if user_uid:
-        os.setuid(user_uid)
-
     if not os.path.exists(index_path):
-        os.mkdir(index_path)
+        print("Given `index_path` do not exists", file=sys.stderr)
+        exit(1)
 
     if not os.path.exists(uploads_path):
-        os.mkdir(uploads_path)
+        print("Given `uploads_path` do not exists", file=sys.stderr)
+        exit(1)
 
     js_path = os.path.join(index_path, "app.js")
     css_path = os.path.join(index_path, "app.css")
@@ -68,19 +67,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "-u",
         "--uploads-path",
-        default="uploads",
-        help="Path to put the uploads files, default: actual path + uploads",
-    )
-    parser.add_argument(
-        "-U",
-        "--user-uid",
-        type=int,
-        help="Use if you want to put it in a privileged path"
-        " like /bin but you want to keep your directories as a normal user",
+        default="~/Downloads/staser_uploads",
+        help="Path to put the upload files, default: ~/Downloads/staser_uploads",
     )
 
     args = parser.parse_args()
 
-    install(args.path, args.index_path, args.uploads_path, args.user_uid)
+    install(args.path, args.index_path, args.uploads_path)
 
     print("\nInstall sucessfull try: staser -h\n")

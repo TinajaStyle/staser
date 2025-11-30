@@ -1,1 +1,6 @@
+__pycache__
+.mypy_cache
+.venv
+
 notes.txt
+uploads
