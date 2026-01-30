@@ -1,7 +1,6 @@
 #!P-REPLACE
 
 from typing import Annotated
-import logging.config
 import argparse
 import logging
 import mimetypes
@@ -56,6 +55,7 @@ async def get_file(path: Annotated[str, Query()]):
 @app.post("/")
 async def recive_file(file: UploadFile):
     filename = file.filename
+    filename = os.path.basename(filename)
     content = await file.read()
 
     file_format = "wb"

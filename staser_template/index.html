@@ -1,27 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Staser - Static Server</title>
-    <link rel="stylesheet" href="app.css">
-</head>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="header">Directory listing</h1>
+      <nav id="controls">
+        <button id="upButton" hidden>Directory Up</button>
+        <button id="downloadAll">Download All</button>
 
-<body>
-    <h1 id="header">Directory listing of /</h1>
+        <input type="file" id="file" name="file" />
+        <label for="file" id="uploadLabel">Upload File</label>
 
-    <div id="controls">
-        <button id="upButton" style="display: none;">Directory Up</button>
-        <button id="downloadAll">Downlad All</button>
-        <input type="file" id="file">
-        <label for="file">Upload File</label>
-    </div>
+        <div id="loader" hidden>Loading…</div>
+      </nav>
+    </header>
 
-    <ul id="listing"></ul>
+    <main>
+      <ul id="listing" role="list"></ul>
+    </main>
 
-    <div id="alert"></div>
-    <script src="app.js"></script>
-</body>
+    <div id="alert" role="status"></div>
 
+    <script src="app.js" defer></script>
+  </body>
 </html>
