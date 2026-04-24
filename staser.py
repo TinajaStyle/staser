@@ -13,6 +13,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
+import aiofiles
 
 logging.basicConfig(format="%(message)s")
 
@@ -64,8 +65,8 @@ async def recive_file(file: UploadFile):
         if mime_type.startswith("text"):
             file_format = "w"
 
-    with open(os.path.join(UPLOADS_PATH, filename), file_format) as f:
-        f.write(content)
+    async with aiofiles.open(os.path.join(UPLOADS_PATH, filename), file_format) as f:
+        await f.write(content)
 
     return JSONResponse(content="", status_code=201)
 

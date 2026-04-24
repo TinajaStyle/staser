@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = document.getElementById("loader");
   const headerBase = "Directory listing of ";
   let currentDir = "./";
+  const entryCollator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: "base",
+  });
 
   // Document
 
@@ -76,6 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return p.endsWith("/") ? p : p + "/";
   }
 
+  function sortEntries(entries) {
+    return [...(entries || [])]
+      .map((name, index) => ({ name, index }))
+      .sort(
+        (left, right) =>
+          entryCollator.compare(left.name, right.name) ||
+          left.index - right.index,
+      )
+      .map((entry) => entry.name);
+  }
+
   /// encode params url builders
   function directoryUrl(path) {
     const params = new URLSearchParams({ directory: path });
@@ -124,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     // directories first
-    (data.directories || []).forEach((dirName) => {
+    sortEntries(data.directories).forEach((dirName) => {
       listing.appendChild(
         createListItem(dirName, "directory", () => {
           // navigate into dir
@@ -133,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }),
       );
     });
-    (data.files || []).forEach((fileName) => {
+    sortEntries(data.files).forEach((fileName) => {
       listing.appendChild(
         createListItem(fileName, "file", () => getFile(fileName)),
       );
